@@ -1,1 +1,1 @@
-seq 1 5 | xargs -n1 -P10  curl "0.0.0.0:6969"
+seq 5 200 | xargs -n1 -P10  curl "localhost:6969"

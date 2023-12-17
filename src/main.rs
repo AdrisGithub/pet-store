@@ -1,5 +1,3 @@
-use std::hash::Hash;
-
 use aul::level::Level;
 use wbsl::error::WBSLError;
 use wbsl::methods::Methods::{Get, Post};

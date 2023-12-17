@@ -33,7 +33,7 @@ impl TryFrom<Values> for Idk {
     }
 }
 
-pub static mut MAP: Vec<Idk> = Vec::new();
+static mut MAP: Vec<Idk> = Vec::new();
 
 fn main() -> Result<(), WBSLError> {
     Server::builder()
@@ -54,12 +54,12 @@ pub fn unsafe_insert(req: Request) -> Response {
     unsafe { insert(req) }
 }
 
-pub unsafe fn get_all() -> Response {
+unsafe fn get_all() -> Response {
     println!("{:?}", MAP);
     ok(MAP.json())
 }
 
-pub unsafe fn insert(req: Request) -> Response {
+unsafe fn insert(req: Request) -> Response {
     let res = req.get_parsed_body();
     if res.is_ok() {
         let res = res.unwrap();

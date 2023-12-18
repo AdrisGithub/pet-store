@@ -1,13 +1,14 @@
-pub mod server;
-pub mod client;
-
 use aul::level::Level;
 use wbsl::error::WBSLError;
+use wbsl::helper::query;
 use wbsl::methods::Methods::{Get, Post};
 use wbsl::server::Server;
 use whdp::{Request, Response};
 use whdp::resp_presets::{bad_request, created, ok};
 use wjp::{map, ParseError, Serialize, SerializeHelper, Values};
+
+pub mod server;
+pub mod client;
 
 #[derive(Debug)]
 struct Idk {
@@ -40,6 +41,11 @@ fn main() -> Result<(), WBSLError> {
     Server::builder()
         .with_auto_headers("pet-store", "application/json")
         .with_logging(Level::INFO)
+        .group("/api", |b| {
+            b.group("/v1",|v|{
+                v.route("/", Get(hello))
+            })
+        })
         .route("/", Get(unsafe_get))
         .route("/", Post(unsafe_insert))
         .listen("0.0.0.0:6969")?
@@ -47,26 +53,32 @@ fn main() -> Result<(), WBSLError> {
     Ok(())
 }
 
-pub fn unsafe_get(_req: Request) -> Response {
-    unsafe { get_all() }
+pub fn hello(req: Request) -> Response{
+    println!("{:?}", query(req.get_uri().as_str()));
+    ok(String::from("hello"))
+}
+
+
+pub fn unsafe_get(req: Request) -> Response {
+    unsafe { get_all(req) }
 }
 
 pub fn unsafe_insert(req: Request) -> Response {
     unsafe { insert(req) }
 }
 
-unsafe fn get_all() -> Response {
+unsafe fn get_all(req: Request) -> Response {
+    println!("{:?}", query(req.get_uri().as_str()));
     println!("{:?}", MAP);
     ok(MAP.json())
 }
 
 unsafe fn insert(req: Request) -> Response {
+    println!("{:?}", query(req.get_uri().as_str()));
     let res = req.get_parsed_body();
     if res.is_ok() {
         let res = res.unwrap();
-        println!("{:?}", res);
         MAP.push(res);
-        println!("{:?}", MAP);
         created(String::new())
     } else {
         bad_request(String::new())

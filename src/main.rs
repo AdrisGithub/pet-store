@@ -1,3 +1,6 @@
+pub mod server;
+pub mod client;
+
 use aul::level::Level;
 use wbsl::error::WBSLError;
 use wbsl::methods::Methods::{Get, Post};

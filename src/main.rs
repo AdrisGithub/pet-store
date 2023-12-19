@@ -41,19 +41,19 @@ fn main() -> Result<(), WBSLError> {
     Server::builder()
         .with_auto_headers("pet-store", "application/json")
         .with_logging(Level::INFO)
+        .health()
         .group("/api", |b| {
-            b.group("/v1",|v|{
-                v.route("/", Get(hello))
+            b.group("/v1", |v| {
+                v.route("/", Get(unsafe_get))
+                 .route("/", Post(unsafe_insert))
             })
         })
-        .route("/", Get(unsafe_get))
-        .route("/", Post(unsafe_insert))
         .listen("0.0.0.0:6969")?
         .start();
     Ok(())
 }
 
-pub fn hello(req: Request) -> Response{
+pub fn hello(req: Request) -> Response {
     println!("{:?}", query(req.get_uri().as_str()));
     ok(String::from("hello"))
 }

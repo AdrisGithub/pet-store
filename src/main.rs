@@ -2,6 +2,7 @@ use aul::level::Level;
 use wbsl::error::WBSLError;
 use wbsl::helper::query;
 use wbsl::methods::Methods::{Get, Post};
+use wbsl::prop;
 use wbsl::server::Server;
 use whdp::{Request, Response};
 use whdp::resp_presets::{bad_request, created, ok};
@@ -38,6 +39,8 @@ impl TryFrom<Values> for Idk {
 static mut MAP: Vec<Idk> = Vec::new();
 
 fn main() -> Result<(), WBSLError> {
+
+    println!("{:?}",prop!("hello"));
     Server::builder()
         .with_auto_headers("pet-store", "application/json")
         .with_logging(Level::INFO)

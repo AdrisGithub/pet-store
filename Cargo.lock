@@ -48,9 +48,9 @@ dependencies = [
 
 [[package]]
 name = "whdp"
-version = "1.1.9"
+version = "1.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75528aceea198c7307dd0c4c81991e8bdd7e7dcbb37b43f5610b3bc08e194c5b"
+checksum = "06f98551f2cb9d6130153dd635d05177b79d047e345ce46c8c7565222ad34561"
 dependencies = [
  "wjp",
 ]

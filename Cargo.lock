@@ -39,7 +39,9 @@ dependencies = [
 
 [[package]]
 name = "wbsl"
-version = "0.0.1"
+version = "0.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53fc1b96a647ecb722b29edd609ab8cac1ea52ee5bb1ea175b03c6dda076ab1e"
 dependencies = [
  "aul",
  "whdp",

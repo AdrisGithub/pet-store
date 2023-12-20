@@ -8,9 +8,6 @@ use whdp::{Request, Response};
 use whdp::resp_presets::{bad_request, created, ok};
 use wjp::{map, ParseError, Serialize, SerializeHelper, Values};
 
-pub mod server;
-pub mod client;
-
 #[derive(Debug)]
 struct Idk {
     message: String,

@@ -48,7 +48,7 @@ fn main() -> Result<(), WBSLError> {
                  .route("/", Post(unsafe_insert))
             })
         })
-        .listen("0.0.0.0:6969")?
+        .listen("0.0.0.0:8080")?
         .start();
     Ok(())
 }
